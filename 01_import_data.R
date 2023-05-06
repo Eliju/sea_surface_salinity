@@ -32,11 +32,11 @@ for (f in files) {
   time_units <- climate_output$dim$time$units
   calendar <- climate_output$dim$time$calendar
   if ((time_units == "days since 1970-01-01 00:00:00 UTC") & (calendar == "standard")) {
-    dt <- as.POSIXct(time*24*60*60, origin = "1970-01-01", tz="UTC")
+    dt <- as.POSIXct(time*24*60*60, origin = "1970-01-01", tz = "UTC")
     year_value <- format(as.Date(dt), "%Y")
     month_value <- format(as.Date(dt), "%m")
 
-        sss_df <- as_tibble(sss, rownames = "lon")
+    sss_df <- as_tibble(sss, rownames = "lon")
     sss_one_day <- sss_df |> 
       pivot_longer(
         cols = starts_with("V"), 
@@ -50,10 +50,10 @@ for (f in files) {
         month = month_value
       )
     if (first) {
-      sss_final = sss_one_day
+      sss_final <-  sss_one_day
       first <- F
-      prev_month = month_value
-      prev_year = year_value
+      prev_month <-  month_value
+      prev_year <-  year_value
     } else if ((prev_year == year_value) & (prev_month == month_value)) { 
       sss_final <- bind_rows(sss_final, sss_one_day) 
     } else {
